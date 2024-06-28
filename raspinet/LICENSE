@@ -1,0 +1,28 @@
+**LICENSE**
+
+Choose a license for your project (e.g., MIT License). You can use a template from [choosealicense.com](https://choosealicense.com/).
+
+**pyproject.toml**
+
+Make sure your `pyproject.toml` is properly configured. It should look something like this:
+
+```toml
+[tool.poetry]
+name = "raspinet"
+version = "0.1.0"
+description = "A library for simplifying networking between Raspberry Pis"
+authors = ["Jason Li <jason.ye.li.7@example.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "raspinet"}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+# Add any other dependencies here
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2.4"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
