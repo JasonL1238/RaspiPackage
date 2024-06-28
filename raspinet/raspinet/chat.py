@@ -30,7 +30,7 @@ class ChatServer:
                     self.server.clients.remove(client)
 
     def start(self):
-        print("Chat server started")
+        print(f"Chat server started on port {self.server.port}")
         while True:
             client_socket, address = self.server.server.accept()
             self.server.clients.append(client_socket)
@@ -41,24 +41,24 @@ class ChatClient:
     def __init__(self, server_ip, port=8080):
         self.network = RaspiNet()
         self.server_ip = server_ip
-        self.network.connect_to_device(server_ip)
         self.port = port
+        self.network.connect_to_device(server_ip, port)
         threading.Thread(target=self.receive_messages).start()
 
     def receive_messages(self):
         while True:
             try:
-                message = self.network.receive_message(self.server_ip)
+                message = self.network.receive_message(self.server_ip, self.port)
                 if message:
                     print(message)
             except:
                 print("Connection closed")
-                self.network.disconnect_device(self.server_ip)
+                self.network.disconnect_device(self.server_ip, self.port)
                 break
 
     def send_message(self, message):
         formatted_message = f"{self.network.get_local_ip()}: {message}"
-        self.network.send_message(formatted_message, self.server_ip)
+        self.network.send_message(formatted_message, self.server_ip, self.port)
 
 def start_chat_server():
     server = ChatServer()

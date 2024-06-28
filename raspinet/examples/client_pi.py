@@ -1,3 +1,4 @@
+#poetry run python examples/client_pi.py 127.0.0.1
 from raspinet.chat import start_chat_client
 import sys
 
@@ -10,5 +11,5 @@ if __name__ == "__main__":
     client = start_chat_client(server_ip)
 
     while True:
-        message = input()
+        message = input("")
         client.send_message(message)
